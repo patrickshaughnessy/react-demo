@@ -17,11 +17,13 @@ var Counter = React.createClass({
   },
 
   render: function(){
+    let {addCount, minusCount, counter} = this.props;
+
     return (
       <div>
-        <button onClick={this.props.addCount}>+</button>
-        <button onClick={this.props.minusCount}>-</button>
-        <h3>Counter 2: {this.props.counter}</h3>
+        <button onClick={addCount}>+</button>
+        <button onClick={minusCount}>-</button>
+        <h3>Counter 2: {counter}</h3>
       </div>
     )
   }
