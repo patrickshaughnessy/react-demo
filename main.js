@@ -17,13 +17,14 @@ var Counter = React.createClass({
   },
 
   render: function(){
-    let {addCount, minusCount, counter, id} = this.props;
+    let {addCount, minusCount, counter, id, deleteCounter} = this.props;
 
     return (
       <div>
         <button onClick={addCount}>+</button>
         <button onClick={minusCount}>-</button>
         <h3>Counter {id + 1}: {counter}</h3>
+        <button onClick={() => deleteCounter(id)}>Delete this counter</button>
       </div>
     )
   }
@@ -50,7 +51,11 @@ var Root = React.createClass({
     let counters = this.state.counters;
     let nextCounterId = counters.length ? counters[counters.length - 1] : 1;
     this.setState({counters: this.state.counters.concat({id: nextCounterId})})
+  },
 
+  deleteCounter: function(idx){
+    console.log('here', idx);
+    this.setState({counters: this.state.counters.slice(0, idx).concat(this.state.counters.slice(idx + 1))})
   },
 
   render: function(){
@@ -58,7 +63,8 @@ var Root = React.createClass({
     let counterProps = {
       addCount: this.addCount,
       minusCount: this.minusCount,
-      counter: this.state.counter
+      counter: this.state.counter,
+      deleteCounter: this.deleteCounter
     }
 
     return (
