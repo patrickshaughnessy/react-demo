@@ -9,7 +9,12 @@ export default class App extends Component {
       count: 0,
       counters: [],
       index: 0
-    }
+    };
+
+    this.addCount = this.addCount.bind(this);
+    this.minusCount = this.minusCount.bind(this);
+    this.addCounter = this.addCounter.bind(this);
+    this.deleteCounter = this.deleteCounter.bind(this);
   }
 
   addCount(id) {
@@ -60,7 +65,7 @@ export default class App extends Component {
     return (
       <div>
         <Welcome />
-        <button onClick={this.addCounter.bind(this)}>Add A Counter</button>
+        <button onClick={this.addCounter}>Add A Counter</button>
         {this.state.counters.map(counter => {
           return <Counter key={counter.id} counter={counter} {...counterProps} />
         })}
