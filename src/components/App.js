@@ -1,76 +1,14 @@
 import React, { Component } from 'react'
-import Welcome from './Welcome'
-import Counter from './Counter'
 
 export default class App extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      count: 0,
-      counters: [],
-      index: 0
-    };
-
-    this.addCount = this.addCount.bind(this);
-    this.minusCount = this.minusCount.bind(this);
-    this.addCounter = this.addCounter.bind(this);
-    this.deleteCounter = this.deleteCounter.bind(this);
-  }
-
-  addCount(id) {
-    this.setState({counters: this.state.counters.map(counter => {
-      if (counter.id === id) {
-        counter.count++
-      }
-      return counter;
-    })})
-  }
-
-  minusCount(id) {
-    this.setState({counters: this.state.counters.map(counter => {
-      if (counter.id === id) {
-        counter.count--
-      }
-      return counter;
-    })})
-  }
-
-  addCounter() {
-    let counters = this.state.counters;
-    let counterId = this.state.index;
-
-    let newCounter = {
-      id: counterId,
-      count: 0
-    }
-
-    this.setState({
-      counters: this.state.counters.concat(newCounter),
-      index: counterId + 1
-    })
-  }
-
-  deleteCounter(id) {
-    this.setState({counters: this.state.counters.filter(counter => counter.id !== id)})
   }
 
   render() {
-
-    let counterProps = {
-      addCount: this.addCount,
-      minusCount: this.minusCount,
-      deleteCounter: this.deleteCounter
-    }
-
     return (
       <div>
-        <Welcome />
-        <button onClick={this.addCounter}>Add A Counter</button>
-        {this.state.counters.map(counter => {
-          return <Counter key={counter.id} counter={counter} {...counterProps} />
-        })}
-
-
+        <h1>Welcome to Managed Properties!</h1>
       </div>
     )
   }
