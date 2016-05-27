@@ -1,36 +1,36 @@
-const React = require('react');
-const Welcome = require('./Welcome');
-const Counter = require('./Counter');
+import React, { Component } from 'react'
+import Welcome from './Welcome'
+import Counter from './Counter'
 
-var App = React.createClass({
-
-  getInitialState: function(){
-    return {
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
       count: 0,
       counters: [],
       index: 0
     }
-  },
+  }
 
-  addCount: function(id){
+  addCount(id) {
     this.setState({counters: this.state.counters.map(counter => {
       if (counter.id === id) {
         counter.count++
       }
       return counter;
     })})
-  },
+  }
 
-  minusCount: function(id){
+  minusCount(id) {
     this.setState({counters: this.state.counters.map(counter => {
       if (counter.id === id) {
         counter.count--
       }
       return counter;
     })})
-  },
+  }
 
-  addCounter: function(){
+  addCounter() {
     let counters = this.state.counters;
     let counterId = this.state.index;
 
@@ -43,13 +43,13 @@ var App = React.createClass({
       counters: this.state.counters.concat(newCounter),
       index: counterId + 1
     })
-  },
+  }
 
-  deleteCounter: function(id){
+  deleteCounter(id) {
     this.setState({counters: this.state.counters.filter(counter => counter.id !== id)})
-  },
+  }
 
-  render: function(){
+  render() {
 
     let counterProps = {
       addCount: this.addCount,
@@ -60,8 +60,7 @@ var App = React.createClass({
     return (
       <div>
         <Welcome />
-        <button onClick={this.addCounter}>Add A Counter</button>
-
+        <button onClick={this.addCounter.bind(this)}>Add A Counter</button>
         {this.state.counters.map(counter => {
           return <Counter key={counter.id} counter={counter} {...counterProps} />
         })}
@@ -70,6 +69,4 @@ var App = React.createClass({
       </div>
     )
   }
-})
-
-module.exports = App;
+}
