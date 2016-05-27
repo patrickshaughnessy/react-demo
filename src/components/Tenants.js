@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AddTenantForm from './AddTenantForm'
+import TenantsDisplay from './TenantsDisplay'
 
 export default class Tenants extends Component {
   constructor(props){
@@ -18,14 +19,15 @@ export default class Tenants extends Component {
   }
 
   render() {
-    let tenants = this.state.tenants.length && this.state.tenants.map(tenant => {
+    let tenants = this.state.tenants.length ? this.state.tenants.map(tenant => {
       return (
         <tr>
           <td>{tenant.name}</td>
           <td>{tenant.email}</td>
+          <td><button>Delete</button></td>
         </tr>
       )
-    })
+    }) : []
     return (
       <div className="text-center row">
         <h1>Tenants</h1>
@@ -35,17 +37,7 @@ export default class Tenants extends Component {
         </div>
 
         <div className="col-xs-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody className="text-left">
-              {tenants}
-            </tbody>
-          </table>
+          <TenantsDisplay tenants={this.state.tenants} />
         </div>
 
       </div>
