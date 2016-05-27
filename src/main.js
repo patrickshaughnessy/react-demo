@@ -1,16 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-var Welcome = React.createClass({
-  render: function(){
-    return (
-      <div>
-        <h1>Demo timez!</h1>
-        <p>Let's count stuff</p>
-      </div>
-    )
-  }
-})
+var Welcome = require('./Welcome');
 
 var Counter = React.createClass({
 
