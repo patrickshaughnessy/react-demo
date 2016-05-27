@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
-import NavBar from './NavBar'
 
-export default class App extends Component {
+export default class Dashboard extends Component {
   constructor(props){
     super(props);
   }
@@ -10,8 +8,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="text-center">
-        <NavBar />
-        {this.props.children}
+        <h1>Welcome to Managed Properties!</h1>
+        <h3>What would you like to do?</h3>
       </div>
     )
   }
