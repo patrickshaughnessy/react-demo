@@ -11,18 +11,17 @@ var Welcome = React.createClass({
 })
 
 var Counter = React.createClass({
-  getInitialState: function(){
-    return {
-      counter: 0
-    }
+
+  componentDidMount: function() {
+    console.log('counter props: ', this.props)
   },
 
   render: function(){
     return (
       <div>
-        <button onClick={() => this.setState({counter: this.state.counter + 1})}>+</button>
-        <button onClick={() => this.setState({counter: this.state.counter - 1})}>-</button>
-        <h3>Counter 2: {this.state.counter}</h3>
+        <button onClick={this.props.addCount}>+</button>
+        <button onClick={this.props.minusCount}>-</button>
+        <h3>Counter 2: {this.props.counter}</h3>
       </div>
     )
   }
@@ -32,27 +31,16 @@ var Root = React.createClass({
 
   getInitialState: function(){
     return {
-      counters: {
-        'one': 0,
-        'two': 0
-      }
+      counter: 0
     }
   },
 
   addCount: function(event){
-    console.log('event target:', event.target);
-    var id = event.target.id;
-    var newState = Object.assign({}, this.state);
-    newState.counters[id]++;
-    this.setState(newState);
+    this.setState({counter: this.state.counter + 1})
   },
 
   minusCount: function(arg, event){
-    console.log('arg', arg, '\nevent', event)
-    var id = arg;
-    var newState = Object.assign({}, this.state);
-    newState.counters[id]--;
-    this.setState(newState);
+    this.setState({counter: this.state.counter - 1})
   },
 
   render: function(){
@@ -62,9 +50,9 @@ var Root = React.createClass({
 
         <button id="one" onClick={this.addCount}>+</button>
         <button onClick={this.minusCount.bind(this, 'one')}>-</button>
-        <h3>Counter 1: {this.state.counters.one}</h3>
+        <h3>Counter 1: {this.state.counter}</h3>
 
-        <Counter />
+        <Counter addCount={this.addCount} minusCount={this.minusCount} counter={this.state.counter} />
 
       </div>
     )
