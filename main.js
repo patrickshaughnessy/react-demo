@@ -12,19 +12,15 @@ var Welcome = React.createClass({
 
 var Counter = React.createClass({
 
-  componentDidMount: function() {
-    console.log('counter props: ', this.props)
-  },
-
   render: function(){
-    let {addCount, minusCount, counter, id, deleteCounter} = this.props;
+    let {addCount, minusCount, count, counter, deleteCounter} = this.props;
 
     return (
       <div>
         <button onClick={addCount}>+</button>
         <button onClick={minusCount}>-</button>
-        <h3>Counter {id + 1}: {counter}</h3>
-        <button onClick={() => deleteCounter(id)}>Delete this counter</button>
+        <h3>Counter {counter.id + 1}: {count}</h3>
+        <button onClick={() => deleteCounter(counter.id)}>Delete this counter</button>
       </div>
     )
   }
@@ -34,28 +30,31 @@ var Root = React.createClass({
 
   getInitialState: function(){
     return {
-      counter: 0,
-      counters: []
+      count: 0,
+      counters: [],
+      index: 0
     }
   },
 
   addCount: function(event){
-    this.setState({counter: this.state.counter + 1})
+    this.setState({count: this.state.count + 1})
   },
 
   minusCount: function(arg, event){
-    this.setState({counter: this.state.counter - 1})
+    this.setState({count: this.state.count - 1})
   },
 
   addCounter: function(){
     let counters = this.state.counters;
-    let nextCounterId = counters.length ? counters[counters.length - 1] : 1;
-    this.setState({counters: this.state.counters.concat({id: nextCounterId})})
+    let counterId = this.state.index;
+    this.setState({
+      counters: this.state.counters.concat({id: counterId}),
+      index: counterId + 1
+    })
   },
 
-  deleteCounter: function(idx){
-    console.log('here', idx);
-    this.setState({counters: this.state.counters.slice(0, idx).concat(this.state.counters.slice(idx + 1))})
+  deleteCounter: function(id){
+    this.setState({counters: this.state.counters.filter(counter => counter.id !== id)})
   },
 
   render: function(){
@@ -63,7 +62,7 @@ var Root = React.createClass({
     let counterProps = {
       addCount: this.addCount,
       minusCount: this.minusCount,
-      counter: this.state.counter,
+      count: this.state.count,
       deleteCounter: this.deleteCounter
     }
 
@@ -72,8 +71,8 @@ var Root = React.createClass({
         <Welcome />
         <button onClick={this.addCounter}>Add A Counter</button>
 
-        {this.state.counters.map((counter, idx) => {
-          return <Counter key={idx} id={idx} {...counterProps} />
+        {this.state.counters.map(counter => {
+          return <Counter key={counter.id} counter={counter} {...counterProps} />
         })}
 
 
