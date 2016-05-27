@@ -1,3 +1,33 @@
+
+var Welcome = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <h1>Demo timez</h1>
+        <p>Let's count stuff</p>
+      </div>
+    )
+  }
+})
+
+var Counter = React.createClass({
+  getInitialState: function(){
+    return {
+      counter: 0
+    }
+  },
+
+  render: function(){
+    return (
+      <div>
+        <button onClick={() => this.setState({counter: this.state.counter + 1})}>+</button>
+        <button onClick={() => this.setState({counter: this.state.counter - 1})}>-</button>
+        <h3>Counter 2: {this.state.counter}</h3>
+      </div>
+    )
+  }
+})
+
 var Root = React.createClass({
 
   getInitialState: function(){
@@ -28,16 +58,14 @@ var Root = React.createClass({
   render: function(){
     return (
       <div>
-        <h1>Demo timez</h1>
-        <p>Let's count stuff</p>
+        <Welcome />
 
         <button id="one" onClick={this.addCount}>+</button>
         <button onClick={this.minusCount.bind(this, 'one')}>-</button>
         <h3>Counter 1: {this.state.counters.one}</h3>
 
-        <button onClick={this.addCount}>+</button>
-        <button onClick={this.minusCount}>-</button>
-        <h3>Counter 2: {this.state.count}</h3>
+        <Counter />
+
       </div>
     )
   }
