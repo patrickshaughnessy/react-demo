@@ -44,6 +44,13 @@ var Root = React.createClass({
   },
 
   render: function(){
+
+    let counterProps = {
+      addCount: this.addCount,
+      minusCount: this.minusCount,
+      counter: this.state.counter
+    }
+
     return (
       <div>
         <Welcome />
@@ -52,7 +59,7 @@ var Root = React.createClass({
         <button onClick={this.minusCount.bind(this, 'one')}>-</button>
         <h3>Counter 1: {this.state.counter}</h3>
 
-        <Counter addCount={this.addCount} minusCount={this.minusCount} counter={this.state.counter} />
+        <Counter {...counterProps} />
 
       </div>
     )
