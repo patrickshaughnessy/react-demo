@@ -2,20 +2,40 @@ import React, { Component } from 'react'
 import AddTenantForm from './AddTenantForm'
 import TenantsDisplay from './TenantsDisplay'
 
+import TenantActions from '../actions/TenantActions'
+import TenantStore from '../stores/TenantStore'
+
+let _getComponentState = () => {
+  return {
+    tenants: TenantStore.getAllTenants()
+  }
+}
+
 export default class Tenants extends Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      tenants: []
-    }
+    this.state = _getComponentState()
+    this._onChange = this._onChange.bind(this)
 
     this.addTenant = this.addTenant.bind(this);
   }
 
+  componentDidMount() {
+    TenantStore.startListening(this._onChange);
+  }
+
+  componentWillUnmount() {
+    TenantStore.stopListening(this._onChange)
+  }
+
+  _onChange() {
+    this.setState(_getComponentState())
+  }
+
   addTenant(tenant){
-    console.log('Add this tenant to our register: ', tenant)
-    this.setState({tenants: this.state.tenants.concat(tenant)})
+    console.log('Add this tenant to our register: ', tenant, TenantActions.addNewTenant)
+    TenantActions.addNewTenant(tenant);
   }
 
   render() {

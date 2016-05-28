@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: [
     'bootstrap-loader',
-    './src/index.js'
+    './client/index.js'
   ],
   output: {
     path: path.resolve(__dirname + 'build'),
