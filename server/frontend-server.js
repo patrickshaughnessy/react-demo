@@ -1,5 +1,3 @@
-'use strict'
-
 import express from 'express'
 import path from 'path'
 import logger from 'morgan'
@@ -22,4 +20,17 @@ app.use('/api', routes);
 
 app.listen(PORT, () => {
   console.log('API server listening on port ' + PORT)
+})
+
+import webpack from 'webpack'
+import config from '../webpack.config'
+import WebpackDevServer from 'webpack-dev-server'
+
+new WebpackDevServer(webpack(config), {
+  hot: true,
+  historyApiFallback: true
+
+}).listen(3001, 'localhost', function(err, result){
+  if (err) return console.log(err);
+  console.log('Listening on 3001')
 })
