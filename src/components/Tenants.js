@@ -19,9 +19,11 @@ export default class Tenants extends Component {
     this._onChange = this._onChange.bind(this)
 
     this.addTenant = this.addTenant.bind(this);
+    this.deleteTenant = this.deleteTenant.bind(this);
   }
 
   componentDidMount() {
+    TenantActions.getAllTenants();
     TenantStore.startListening(this._onChange);
   }
 
@@ -34,20 +36,15 @@ export default class Tenants extends Component {
   }
 
   addTenant(tenant){
-    console.log('Add this tenant to our register: ', tenant, TenantActions.addNewTenant)
+    // console.log('Add this tenant to our register: ', tenant, TenantActions.addNewTenant)
     TenantActions.addNewTenant(tenant);
   }
 
+  deleteTenant(id) {
+    TenantActions.deleteTenant(id);
+  }
+
   render() {
-    let tenants = this.state.tenants.length ? this.state.tenants.map(tenant => {
-      return (
-        <tr>
-          <td>{tenant.name}</td>
-          <td>{tenant.email}</td>
-          <td><button>Delete</button></td>
-        </tr>
-      )
-    }) : []
     return (
       <div className="text-center row">
         <h1>Tenants</h1>
@@ -57,7 +54,7 @@ export default class Tenants extends Component {
         </div>
 
         <div className="col-xs-12">
-          <TenantsDisplay tenants={this.state.tenants} />
+          <TenantsDisplay deleteTenant={this.deleteTenant} tenants={this.state.tenants} />
         </div>
 
       </div>

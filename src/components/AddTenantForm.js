@@ -23,7 +23,7 @@ export default class AddTenantForm extends Component {
     return (
       <form>
         <div className="form-group">
-          <label for="tenantName">Name</label>
+          <label htmlFor="tenantName">Name</label>
           <input type="text"
                  className="form-control"
                  id="tenantName"
@@ -33,7 +33,7 @@ export default class AddTenantForm extends Component {
                  />
         </div>
         <div className="form-group">
-          <label for="tenantEmail">Email</label>
+          <label htmlFor="tenantEmail">Email</label>
           <input type="email"
                  className="form-control"
                  id="tenantEmail"

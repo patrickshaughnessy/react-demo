@@ -13,6 +13,10 @@ class TenantStore extends EventEmitter {
           _tenants = action.tenants;
           this.emit('CHANGE');
           break;
+        case 'RECEIVE_ONE_TENANT':
+          _tenants.push(action.tenant);
+          this.emit('CHANGE');
+          break;
       }
     });
   }
