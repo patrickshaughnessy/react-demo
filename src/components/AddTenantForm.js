@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import TenantActions from '../actions/TenantActions'
+
 export default class AddTenantForm extends Component {
   constructor(props){
     super(props);
@@ -15,7 +17,7 @@ export default class AddTenantForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     if (!this.state.name.length || !this.state.email.length) return;
-    this.props.addTenant(this.state);
+    TenantActions.addNewTenant(this.state);
     this.setState({name: '', email: ''})
   }
 

@@ -1,5 +1,5 @@
-import { get, post, put } from 'jquery'
-// import fetch from 'fetch'
+import { get, post, ajax } from 'jquery'
+
 import ServerActions from './actions/ServerActions'
 
 const API = {
@@ -14,8 +14,26 @@ const API = {
   },
 
   updateTenant(tenant) {
-    put('api/tenants', tenant)
-      .done(response => { ServerActions.receiveTenants(response) })
+    // ajax({
+    //   url: '/api/tenants',
+    //   method: 'PUT',
+    //   contentType: 'application/json',
+    //   data: JSON.stringify(tenant),
+    //   success: (res) => {
+    //     console.log(res);
+    //   }
+    // })
+    fetch('/api/tenants', {
+      method: 'PUT',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(tenant)
+    })
+      .then((res) => res.json())
+      .then(data => {
+        console.log(data);
+      })
   },
 
   deleteTenant(tenantID) {
