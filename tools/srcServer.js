@@ -11,15 +11,17 @@ import cookieParser from 'cookie-parser';
 import graphqlHTTP from 'express-graphql';
 import schema from './data/index'
 
+import api from './api/index'
+
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
 
-// import mongoose from 'mongoose';
-//
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/property-manager');
+import mongoose from 'mongoose';
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/property-manager');
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -33,9 +35,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/api', api);
+
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  pretty: true
+  pretty: true,
+  graphiql: true
 }))
 
 app.get('*', function(req, res) {

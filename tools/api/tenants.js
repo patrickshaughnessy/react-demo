@@ -9,6 +9,12 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/:id', (req, res) => {
+  Tenant.findById(req.params.id, (err, tenant) => {
+    return res.status(err ? 400 : 200).send(err || tenant);
+  })
+})
+
 router.post('/', (req, res) => {
   Tenant.create(req.body, (err, tenant) => {
     return res.status(err ? 400 : 200).send(err || tenant);
@@ -16,7 +22,6 @@ router.post('/', (req, res) => {
 })
 
 router.put('/', (req, res) => {
-  console.log(req.body);
   Tenant.findByIdAndUpdate(req.body._id, req.body, 'new', (err, tenant) => {
     if (err) return res.status(400).send(err);
     Tenant.find({}, (err, tenants) => {
