@@ -11,33 +11,27 @@ var Root = React.createClass({
 
   addCount: function(event){
     console.log('event target:', event.target);
-    var id = event.target.id;
-    var newState = Object.assign({}, this.state);
-    newState.counters[id]++;
-    this.setState(newState);
+    // this.setState({ count: this.state.count + 1 })
   },
 
-  minusCount: function(arg, event){
+  minusCount: function(args, event){
     console.log('arg', arg, '\nevent', event)
-    var id = arg;
-    var newState = Object.assign({}, this.state);
-    newState.counters[id]--;
-    this.setState(newState);
+    // this.setState({ count: this.state.count - 1 })
   },
 
   render: function(){
     return (
       <div>
-        <h1>Demo timez</h1>
+        <h1>Hello from React</h1>
         <p>Let's count stuff</p>
 
+        <h3>Counter 1: {this.state.counter.one}</h3>
         <button id="one" onClick={this.addCount}>+</button>
         <button onClick={this.minusCount.bind(this, 'one')}>-</button>
-        <h3>Counter 1: {this.state.counters.one}</h3>
 
-        <button onClick={this.addCount}>+</button>
-        <button onClick={this.minusCount}>-</button>
-        <h3>Counter 2: {this.state.count}</h3>
+        <h3>Counter 2: {this.state.counter.two}</h3>
+        <button id="two" onClick={this.addCount}>+</button>
+        <button onClick={this.minusCount.bind(this, 'two')}>-</button>
       </div>
     )
   }
