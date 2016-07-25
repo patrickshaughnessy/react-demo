@@ -25,11 +25,11 @@ var Root = React.createClass({
         <h1>Hello from React</h1>
         <p>Let's count stuff</p>
 
-        <h3>Counter 1: {this.state.counter.one}</h3>
+        <h3>Counter 1: {this.state.counters.one}</h3>
         <button id="one" onClick={this.addCount}>+</button>
         <button onClick={this.minusCount.bind(this, 'one')}>-</button>
 
-        <h3>Counter 2: {this.state.counter.two}</h3>
+        <h3>Counter 2: {this.state.counters.two}</h3>
         <button id="two" onClick={this.addCount}>+</button>
         <button onClick={this.minusCount.bind(this, 'two')}>-</button>
       </div>
