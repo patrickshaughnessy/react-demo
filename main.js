@@ -1,24 +1,19 @@
-var Welcome = React.createClass({
+var Root = React.createClass({
+  getInitialState: function(){
+    return {
+      messages: []
+    }
+  },
+
+  addMessage: function(message){
+    console.log('message: ', message);
+  },
+
   render: function(){
-
-    let message = this.props.message
-
     return (
       <div>
-        <h1>{message}</h1>
-        <p>Let's count stuff</p>
+        <MessageForm addMessage={this.addMessage} />
       </div>
-    )
-  }
-});
-
-var Root = React.createClass({
-  render: function(){
-
-    let message = 'Hello from React'
-
-    return (
-      <Welcome message={message} />
     )
   }
 })
