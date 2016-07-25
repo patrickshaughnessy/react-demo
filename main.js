@@ -14,7 +14,7 @@ var Root = React.createClass({
     // this.setState({ count: this.state.count + 1 })
   },
 
-  minusCount: function(args, event){
+  minusCount: function(arg, event){
     console.log('arg', arg, '\nevent', event)
     // this.setState({ count: this.state.count - 1 })
   },
