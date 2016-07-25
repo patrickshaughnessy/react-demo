@@ -1,8 +1,11 @@
 var Welcome = React.createClass({
   render: function(){
+
+    let message = this.props.message
+
     return (
       <div>
-        <h1>Hello from React</h1>
+        <h1>{message}</h1>
         <p>Let's count stuff</p>
       </div>
     )
@@ -10,10 +13,12 @@ var Welcome = React.createClass({
 });
 
 var Root = React.createClass({
-
   render: function(){
+
+    let message = 'Hello from React'
+
     return (
-      <Welcome />
+      <Welcome message={message} />
     )
   }
 })
