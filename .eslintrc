@@ -2,9 +2,9 @@
 {
   "extends": [
     "airbnb",
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
+    # "eslint:recommended",
+    # "plugin:import/errors",
+    # "plugin:import/warnings"
   ],
   "plugins": [
     "react"
