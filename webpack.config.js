@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: [
     'bootstrap-loader',
+    './src/styles.css',
     './src/index.js'
   ],
   output: {
