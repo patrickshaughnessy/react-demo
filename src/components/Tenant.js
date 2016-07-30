@@ -8,7 +8,7 @@ export default class Tenant extends Component {
 
     this.state = {
       editing: false,
-      tenant: {}
+      tenant: this.props.tenant,
     }
 
     this.editTenant = this.editTenant.bind(this);
@@ -17,38 +17,30 @@ export default class Tenant extends Component {
   }
 
   updateName(e) {
-    let tenant = this.state.tenant;
+    let tenant = Object.assign({}, this.state.tenant);
     tenant.name = e.target.value;
-    this.setState(tenant)
+    this.setState({ tenant })
   }
+
   updateEmail(e) {
-    console.log(this.state.tenant)
-    let tenant = this.state.tenant;
+    let tenant = Object.assign({}, this.state.tenant);
     tenant.email = e.target.value;
-    this.setState(tenant)
+    this.setState({ tenant })
   }
 
   editTenant() {
-    if (!this.state.editing) {
-      this.setState({
-        tenant: this.props.tenant,
-        editing: !this.state.editing
-      })
-    } else {
-      console.log(this.state.tenant)
+    if (this.state.editing) {
       TenantActions.updateTenant(this.state.tenant)
-      this.setState({
-        tenant: {},
-        editing: !this.state.editing
-      })
     }
+    this.setState({ editing: !this.state.editing })
   }
 
   render() {
-    let { _id, name, email } = this.props.tenant
 
-    let nameDisplay = this.state.editing ? <input onChange={this.updateName} defaultValue={name} /> : name
-    let emailDisplay = this.state.editing ? <input onChange={this.updateEmail} defaultValue={email} /> : email
+    let { _id, name, email } = this.state.tenant;
+
+    let nameDisplay = this.state.editing ? <input onChange={this.updateName} defaultValue={ name } /> : name
+    let emailDisplay = this.state.editing ? <input onChange={this.updateEmail} defaultValue={ email } /> : email
 
     return (
       <tr>
